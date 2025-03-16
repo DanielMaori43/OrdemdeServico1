@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Usuário</title>
+    <style>
+        body {
+            background-color: black;
+            color: green;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        .register-container {
+            background-color: #222;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px green;
+            text-align: center;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid green;
+            border-radius: 5px;
+            background-color: black;
+            color: green;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: green;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0a0;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <h2>Cadastro de Usuário</h2>
+        <input type="text" id="newUsername" placeholder="Novo Usuário">
+        <input type="password" id="newPassword" placeholder="Nova Senha">
+        <button onclick="handleRegister()">Cadastrar</button>
+        <button onclick="goBack()">Voltar</button>
+    </div>
+    
+    <script>
+        function handleRegister() {
+            const newUsername = document.getElementById("newUsername").value;
+            const newPassword = document.getElementById("newPassword").value;
+            
+            if (newUsername && newPassword) {
+                let users = JSON.parse(localStorage.getItem("users")) || [];
+                users.push({ username: newUsername, password: newPassword });
+                localStorage.setItem("users", JSON.stringify(users));
+                alert("Usuário cadastrado com sucesso!");
+                window.location.href = "index"; // Redireciona para a tela de login
+            } else {
+                alert("Preencha todos os campos!");
+            }
+        }
+        
+        function goBack() {
+            window.location.href = "index.htmll"; // Volta para a tela de login
+        }
+    </script>
+</body>
+</html>

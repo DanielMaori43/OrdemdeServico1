@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="menu.css">
+
+  <title>Tecnogrup informática</title>
+</head>
+
+<body>
+  <header>
+
+    <a href="index.html">Inicio</a>
+
+    <div class="logo">
+      <img src="/imagem/Logo.jpeg" alt="Logo">
+    </div>
+  </header>
+  
+  <div class="container">
+    <h1>Ordem de Serviço</h1>
+    
+    <form id="ordem-form">
+      
+      <button type="button" onclick="window.location.href='ordem de serviço.html';">Gerar ordem de Serviço</button>
+
+    </form>
+    
+    <div class="ordens-lista">
+        
+        <ul id="ordens-lista"></ul>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+  </html>

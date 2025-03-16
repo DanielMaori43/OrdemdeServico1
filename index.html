@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de Login</title>
+    <style>
+        body {
+            background-color: black;
+            color: green;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        .login-container {
+            background-color: black;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px white;
+            text-align: center;
+            align-items: center;
+        }
+        input {
+            width: 100%;
+            padding: 4px;
+            margin: 10px 0;
+            border: 1px solid green;
+            border-radius: 5px;
+            background-color: black;
+            color: green;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: green;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-left: 7px;
+        }
+        button:hover {
+            background-color: #0a0;
+        }
+        .register-link {
+            margin-top: 10px;
+            cursor: pointer;
+            color: green;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Usuário">
+        <input type="password" id="password" placeholder="Senha">
+        <button onclick="handleLogin()">Entrar</button>
+        <p class="register-link" onclick="openRegisterPage()">Cadastrar</p>
+    </div>
+    
+    <script>
+        const adminPassword = "admin123"; // Senha fixa do administrador
+
+        function handleLogin() {
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+
+    // Verifica se o usuário e senha existem na lista
+    const validUser = users.find(user => user.username === username && user.password === password);
+
+    if (validUser) {
+        alert("Login realizado com sucesso!");
+        window.location.href = "menu.html"; // Redireciona para a página principal
+    } else {
+        alert("Usuário ou senha incorretos!");
+    }
+
+
+        }
+
+        function openRegisterPage() {
+            const adminKey = prompt("Digite a senha de administrador:");
+            if (adminKey === adminPassword) {
+                window.location.href = "register.html"; // Abre a tela de cadastro
+            } else {
+                alert("Senha de administrador incorreta!");
+            }
+        }
+    </script>
+</body>
+</html>
+
