@@ -147,11 +147,11 @@
     color: white;
     
   }
-h5{
+  h5{
     color: white;
-    font-size: 25px;
+    
   }
-  
+    
   
   /* Responsividade para dispositivos móveis */
   @media (max-width: 480px) {
