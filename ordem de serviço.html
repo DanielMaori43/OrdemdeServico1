@@ -28,9 +28,18 @@
             align-items: center;
             border-bottom: 2px solid #000;
             padding-bottom: 10px;
+            position: relative;
         }
         .header h2 {
             margin: 0;
+            text-align: left;
+            flex-grow: 1;
+        }
+        .numero-pagina {
+            position: absolute;
+            left: 0;
+            top: -20px;
+            font-weight: bold;
         }
         .section {
             margin-top: 15px;
@@ -74,9 +83,9 @@
 <body>
     <div class="container" id="pdf-content">
         <div class="header">
+            <p class="numero-pagina" id="numero-pagina">Página: 1</p>
             <h2>Ordem de Serviço</h2>
-            <p id="numero-pagina">Página: 1</p>
-            <img src="imagem/Logo.jpeg" alt="">
+            <img src="/imagem/Logo.jpeg" alt="">
         </div>
         <form id="ordem-form">
             <div class="section">
