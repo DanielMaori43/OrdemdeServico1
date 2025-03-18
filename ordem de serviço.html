@@ -63,7 +63,6 @@
         button:hover {
             background-color: #0056b3;
         }
-        /* Adicionando a classe para ocultar o botão durante a geração do PDF */
         .hide-button {
             display: none;
         }
@@ -76,9 +75,15 @@
     <div class="container" id="pdf-content">
         <div class="header">
             <h2>Ordem de Serviço</h2>
-            <img src="imagem/Logo.jpeg" alt="">
+            <p id="numero-pagina">Página: 1</p>
+            <img src="/imagem/Logo.jpeg" alt="">
         </div>
         <form id="ordem-form">
+            <div class="section">
+                <h4>Técnico Responsável</h4>
+                <label>Nome:</label>
+                <input type="text" id="cliente" required>
+            </div>
             <div class="section">
                 <h4>Dados do Cliente</h4>
                 <label>Nome:</label>
@@ -96,6 +101,8 @@
                 <input type="text" id="modelo" required>
                 <label>Defeito Reclamado:</label>
                 <textarea id="defeito" required></textarea>
+                <label>Diaguinóstico:</label>
+                <textarea id="defeito" required></textarea>
             </div>
             <div class="section">
                 <h4>Valores</h4>
@@ -111,27 +118,35 @@
     </div>
 
     <script>
+        let numeroPagina = localStorage.getItem('numeroPagina');
+        if (!numeroPagina) {
+            numeroPagina = 1;
+        } else {
+            numeroPagina = parseInt(numeroPagina);
+        }
+
+        document.getElementById('numero-pagina').textContent = "Página: " + numeroPagina;
+
         document.getElementById('ordem-form').addEventListener('submit', function(event) {
             event.preventDefault();
 
-            // Oculta o botão "Gerar Ordem de Serviço" antes de gerar o PDF
             document.getElementById('gerar-btn').classList.add('hide-button');
+            gerarPDF(numeroPagina);
             
-            // Gera o PDF com o conteúdo da div #pdf-content
-            gerarPDF();
+            numeroPagina++;
+            localStorage.setItem('numeroPagina', numeroPagina);
+            document.getElementById('numero-pagina').textContent = "Página: " + numeroPagina;
         });
 
-        function gerarPDF() {
+        function gerarPDF(numeroPagina) {
             const element = document.getElementById('pdf-content');
             const options = {
-                filename: 'ordem_servico.pdf',
+                filename: `ordem_servico_${numeroPagina}.pdf`,
                 html2canvas: { scale: 2 },
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
             
-            // Gera o PDF e chama o método .save() para salvar
             html2pdf().from(element).set(options).save().then(() => {
-                // Após salvar o PDF, retorna o botão para a tela
                 document.getElementById('gerar-btn').classList.remove('hide-button');
             });
         }
