@@ -17,7 +17,7 @@
         }
         img{
             width: 200px;
-            height: 120px;
+            height: 110px;
         }
         .container {
             max-width: 900px;
@@ -88,7 +88,7 @@
 <body>
     <div class="container" id="pdf-content">
         <div class="header">
-            <p class="numero-pagina" id="numero-pagina">Página: 1</p>
+            <p class="numero-pagina" id="numero-pagina">Ordem: 1</p>
             <h2>Ordem de Serviço</h2>
             <img src="imagem/Logo.jpeg" alt="">
         </div>
@@ -115,12 +115,11 @@
                 <input type="text" id="modelo" required>
                 <label>Defeito Reclamado:</label>
                 <textarea id="defeito" required></textarea>
-                <label>Diaguinóstico:</label>
-                <textarea id="defeito" required></textarea>
+                <label>Diagnóstico:</label>
+                <textarea id="diagnostico" required></textarea>
             </div>
             <div class="section">
                 <h4>Valores</h4>
-                <label>Orçamento:</label>
                 <input type="text" id="orcamento" required>
                 <label>Desconto:</label>
                 <input type="text" id="desconto" required>
@@ -132,30 +131,30 @@
     </div>
 
     <script>
-        let numeroPagina = localStorage.getItem('numeroPagina');
-        if (!numeroPagina) {
-            numeroPagina = 1;
+        let numeroOrdem = localStorage.getItem('numeroOrdem');
+        if (!numeroOrdem) {
+            numeroOrdem = 1;
         } else {
-            numeroPagina = parseInt(numeroPagina);
+            numeroOrdem = parseInt(numeroOrdem);
         }
 
-        document.getElementById('numero-pagina').textContent = "Página: " + numeroPagina;
+        document.getElementById('numero-pagina').textContent = "Ordem: " + numeroOrdem;
 
         document.getElementById('ordem-form').addEventListener('submit', function(event) {
             event.preventDefault();
 
             document.getElementById('gerar-btn').classList.add('hide-button');
-            gerarPDF(numeroPagina);
+            gerarPDF(numeroOrdem);
             
-            numeroPagina++;
-            localStorage.setItem('numeroPagina', numeroPagina);
-            document.getElementById('numero-pagina').textContent = "Página: " + numeroPagina;
+            numeroOrdem++;
+            localStorage.setItem('numeroOrdem', numeroOrdem);
+            document.getElementById('numero-pagina').textContent = "Ordem: " + numeroOrdem;
         });
 
-        function gerarPDF(numeroPagina) {
+        function gerarPDF(numeroOrdem) {
             const element = document.getElementById('pdf-content');
             const options = {
-                filename: `ordem_servico_${numeroPagina}.pdf`,
+                filename: `ordem_servico_${numeroOrdem}.pdf`,
                 html2canvas: { scale: 2 },
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
